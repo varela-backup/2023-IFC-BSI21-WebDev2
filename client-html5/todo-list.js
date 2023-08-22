@@ -45,6 +45,7 @@ export default function (rootElement) {
     rootElement.append(actionBar, list)
 
     const addNewItem = () => {
+        
         const { item, btDelete } = createItem(input.value)
         btDelete.addEventListener("click", () => item.remove())
         input.value = ""
