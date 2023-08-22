@@ -1,3 +1,3 @@
 import todolist from "./todo-list.js"
-const rootElement = document.querySelector("div.todo-list")
-todolist(rootElement)
+todolist(document.querySelector("div.todo-list"))
+todolist(document.querySelector("div.todo-list2"))
