@@ -45,7 +45,7 @@ export default function (rootElement) {
     rootElement.append(actionBar, list)
 
     const addNewItem = () => {
-        
+        if (input.value == "") return
         const { item, btDelete } = createItem(input.value)
         btDelete.addEventListener("click", () => item.remove())
         input.value = ""
@@ -55,6 +55,8 @@ export default function (rootElement) {
     // input.addEventListener("keydown", ({ key }) => key == "Enter" && addNewItem())
     
     input.addEventListener("keydown", (ev) => {
+        if(ev.key == " " && input.value == "")
+            return ev.preventDefault()
         if (ev.key == "Enter") addNewItem()
     })
 
