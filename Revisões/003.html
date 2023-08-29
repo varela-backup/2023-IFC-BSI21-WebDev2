@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>003</title>
+  <style>
+    div.galeria {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      /* grid-template-columns: repeat(autofill, 300px); */
+      gap: 1rem;
+    }
+
+    div.galeria img:first-child {
+      grid-column: 2 / 4;
+      grid-row: 2 / 4;
+    }
+
+    div.galeria img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+  <div class="galeria">
+    <img src="https://picsum.photos/600/700?random=1">
+    <img src="https://picsum.photos/600/700?random=2">
+    <img src="https://picsum.photos/600/700?random=3">
+    <img src="https://picsum.photos/600/700?random=4">
+    <img src="https://picsum.photos/600/700?random=5">
+    <img src="https://picsum.photos/600/700?random=6">
+    <img src="https://picsum.photos/600/700?random=7">
+    <img src="https://picsum.photos/600/700?random=8">
+    <img src="https://picsum.photos/600/700?random=9">
+    <img src="https://picsum.photos/600/700?random=10">
+    <img src="https://picsum.photos/600/700?random=11">
+    <img src="https://picsum.photos/600/700?random=12">
+    <img src="https://picsum.photos/600/700?random=13">
+    <img src="https://picsum.photos/600/700?random=14">
+    <img src="https://picsum.photos/600/700?random=15">
+    <img src="https://picsum.photos/600/700?random=16">
+    <img src="https://picsum.photos/600/700?random=17">
+  </div>
+  
+</body>
+</html>
