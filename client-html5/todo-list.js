@@ -28,12 +28,14 @@ function createItem(labelText) {
     const item = document.createElement("div")
     const checkbox = document.createElement("input")
     const btDelete = document.createElement("button")
+    const btChange = document.createElement("button")
     const label = document.createElement("span")
     checkbox.type = "checkbox"
     btDelete.textContent = "remove"
+    btChange.textContent = "change"
     label.textContent = labelText
-    item.append(checkbox, label, btDelete)
-    return { item, checkbox, label, btDelete }
+    item.append(checkbox, label, btChange, btDelete)
+    return { item, checkbox, label, btChange, btDelete }
 }
 
 export default function (rootElement) {
@@ -46,8 +48,24 @@ export default function (rootElement) {
 
     const addNewItem = () => {
         if (input.value == "") return
-        const { item, btDelete } = createItem(input.value)
+        const { item, checkbox, label, btDelete, btChange } = createItem(input.value)
         btDelete.addEventListener("click", () => item.remove())
+
+        btChange.addEventListener("click", () => {
+            if (btChange.textContent == "save") {
+                btChange.textContent = "change"
+                label.removeAttribute("contenteditable")
+                return
+            }
+            
+            btChange.textContent = "save"
+            label.setAttribute("contenteditable", "true")
+        })
+
+        checkbox.addEventListener("change", () => {
+            item.classList.toggle("checked", checkbox.checked)
+        })
+        
         input.value = ""
         list.append(item)
     }

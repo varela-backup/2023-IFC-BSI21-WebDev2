@@ -34,9 +34,18 @@
                 font-size: 1.4rem;
             } 
 
+            /* & > input:checked ~ span {
+                text-decoration: line-through;
+            }    */
+
             & > span {
                 flex-grow: 1;
             }
+        }
+
+        & > div.checked {
+            background-color: red;
+            text-decoration: line-through;
         }
     }
 }
