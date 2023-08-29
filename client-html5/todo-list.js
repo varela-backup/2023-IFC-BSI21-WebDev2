@@ -57,7 +57,6 @@ export default function (rootElement) {
                 label.removeAttribute("contenteditable")
                 return
             }
-            
             btChange.textContent = "save"
             label.setAttribute("contenteditable", "true")
         })
