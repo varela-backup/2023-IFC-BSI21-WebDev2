@@ -1,0 +1,98 @@
+* {
+  box-sizing: border-box;
+}
+
+h1, h2, h3 {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  cursor: pointer;
+}
+
+div.form-action-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: .25em;
+}
+
+.main-action-bar {
+  display: flex;
+  padding: 1rem;
+}
+
+.main-action-bar .search {
+  flex-grow: 1;
+  display: flex;
+}
+
+.main-action-bar .search input {
+  flex-grow: 1;
+  padding: .5em;
+}
+
+main {
+  columns: 4;
+}
+
+.tile {
+  border: 1px solid;
+  break-inside: avoid-column;
+  padding: 1em;
+  border-radius: 5px;
+  margin: .25em;
+}
+
+.form-add {
+  display: flex;
+  flex-direction: column;
+  gap: .5em;
+}
+
+.form-add>div {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.form-add>div>label {
+  width: 100%;
+
+  &::after {
+    content: ":";
+  }
+}
+
+
+.form-add>div>input {
+  width: 100%;
+}
+
+.form-add>div:has(button):has(input) {
+  & input {
+    width: 85%;
+  }
+
+  & button {
+    width: 15%;
+  }
+}
+
+.person {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.person > div > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .25em;
+}
+
+.person > div > div > span {
+  background-color: rgb(220, 220, 220);
+  padding: .25em;
+  border-radius: 5px;
+}
