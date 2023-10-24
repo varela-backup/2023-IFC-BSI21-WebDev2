@@ -1,0 +1,81 @@
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(359deg);
+  }
+}
+
+.pending {
+  &::before {
+    font-family: "Material Symbols Outlined";
+    content: "autorenew";
+    color: #f1c40f;
+    animation: spin 2s linear infinite;
+  }
+}
+
+.synced {
+  &::before {
+    font-family: "Material Symbols Outlined";
+    content: "check_circle";
+    color: #2ecc71;
+  }
+}
+
+.error {
+  &::before {
+    font-family: "Material Symbols Outlined";
+    content: "error";
+    color: #e74c3c;
+  }
+}
+
+ul,
+li {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+li {
+  display: flex;
+  gap: .25rem;
+  align-items: center;
+  margin: 1rem;
+}
+
+li > * {
+  font-size: 1rem;
+  padding: .2rem 1rem;
+  background-color: transparent;
+  border-radius: 2px;
+  border: 1px solid rgba(0 0 0 / .5);
+  position: relative;
+  overflow: hidden;
+}
+
+li > span {
+  min-width: 250px;
+}
+
+li button {
+  cursor: pointer;
+  
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    background-color: rgba(0 0 0 / .05);
+    transition: .3s ease-in-out;
+    transform: translateY(100%);
+  }
+
+  &:hover {
+    &::before {
+      transform: translateY(0);
+    }
+  }
+}
