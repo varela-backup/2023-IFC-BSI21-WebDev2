@@ -1,8 +1,8 @@
 import { FocusEvent, KeyboardEvent, useState } from "react"
 
 type TProps = {
-  todolist: string[],
-  setTodolist: (todolist: string[]) => void
+  todolist: { id: number, text: string }[],
+  setTodolist: (todolist: { id: number, text: string }[]) => void
 }
 
 export default function (props: TProps) {
@@ -10,22 +10,22 @@ export default function (props: TProps) {
   const [currentItem, setCurrentItem] = useState<number | null>(null)
 
   const updateInputFn = (event: KeyboardEvent<HTMLInputElement>) => {
-    const value = event.currentTarget.value
-    const key = currentItem as number
-    todolist[key] = value
-    setTodolist(todolist)
-    localStorage.setItem('todolist', JSON.stringify(todolist))
+    // const value = event.currentTarget.value
+    // const key = currentItem as number
+    // todolist[key] = value
+    // setTodolist(todolist)
+    // localStorage.setItem('todolist', JSON.stringify(todolist))
   }
 
-  const removeItem = (index: number) => {
-    const newTodolist = todolist.filter((_, key) => key !== index)
+  const removeItem = async (id: number) => {
+    const response = await fetch(`http://localhost:3000/item/${id}`, { method: 'DELETE' })
+    const newTodolist = todolist.filter((val, key) => val.id !== id)
     setTodolist(newTodolist)
-    localStorage.setItem('todolist', JSON.stringify(newTodolist))
   }
 
   const onUpdateFocus = (event: FocusEvent<HTMLInputElement, Element>) => {
-    if (currentItem)
-      event.currentTarget.value = todolist[currentItem]
+    // if (currentItem)
+    //   event.currentTarget.value = todolist[currentItem]
   }
 
   return <>
@@ -34,15 +34,15 @@ export default function (props: TProps) {
       {/* <li className="synced">synced</li> */}
       {/* <li className="error">error</li> */}
       {todolist.map((todo, key) =>
-        <li key={key} className="synced">
-          <button onClick={() => removeItem(key)}>remove</button>
-          <button onClick={() => setCurrentItem(key)}>update</button>
+        <li key={key} data-id={todo.id} className="synced">
+          <button onClick={() => removeItem(todo.id)}>remove</button>
+          <button onClick={() => setCurrentItem(todo.id)}>update</button>
           {key === currentItem
             ? <input
               data-id={key}
               onFocus={onUpdateFocus}
               onKeyDown={updateInputFn} />
-            : <span>{todo}</span>}
+            : <span>{todo.text}</span>}
         </li>
       )}
     </ul>

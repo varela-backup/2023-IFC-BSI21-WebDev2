@@ -1,8 +1,12 @@
 import express from "express"
+import cors from "cors"
 import { getDatabaseConnection } from "./database"
 
 const PORT = process.env.PORT ?? 3000
 const app = express()
+
+// MIDDLEWARES
+app.use(cors())
 app.use(express.json())
 
 // ROTA PRINCIPAL
