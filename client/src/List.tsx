@@ -1,8 +1,9 @@
 import { FocusEvent, KeyboardEvent, useState } from "react"
+import { TTodoRestItem } from "./App"
 
 type TProps = {
-  todolist: { id: number, text: string }[],
-  setTodolist: (todolist: { id: number, text: string }[]) => void
+  todolist: TTodoRestItem[],
+  setTodolist: (todolist: TTodoRestItem[]) => void
 }
 
 export default function (props: TProps) {
@@ -19,7 +20,7 @@ export default function (props: TProps) {
 
   const removeItem = async (id: number) => {
     const response = await fetch(`http://localhost:3000/item/${id}`, { method: 'DELETE' })
-    const newTodolist = todolist.filter((val, key) => val.id !== id)
+    const newTodolist = todolist.filter((val, _key) => val.id !== id)
     setTodolist(newTodolist)
   }
 

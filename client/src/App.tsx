@@ -4,8 +4,10 @@ import Input from "./Input"
 import List from "./List"
 import './App.css'
 
+export type TTodoRestItem = { id: number, text: string }
+
 export default function App() {
-  const [todolist, setTodolist] = useState<{id: number, text: string}[]>(
+  const [todolist, setTodolist] = useState<TTodoRestItem[]>(
     JSON.parse(localStorage.getItem('todolist') ?? '[]')
   )
 
@@ -16,7 +18,6 @@ export default function App() {
         setTodolist(data)
       })
   }, [])
-
 
   return <>
     <Header />

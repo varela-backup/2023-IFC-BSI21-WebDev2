@@ -1,8 +1,9 @@
 import { KeyboardEvent } from "react"
+import { TTodoRestItem } from "./App"
 
 type TProps = { 
-  todolist: string[], 
-  setTodolist: (todolist: string[]) => void 
+  todolist: TTodoRestItem[], 
+  setTodolist: (todolist: TTodoRestItem[]) => void 
 }
 
 export default function (props: TProps) {
