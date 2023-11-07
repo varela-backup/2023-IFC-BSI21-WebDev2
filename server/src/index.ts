@@ -41,15 +41,16 @@ app.put("/item/:id", async (req, res) => {
 app.patch("/item/:id", async (req, res) => {
   const { id } = req.params
   const keys = Object.keys(req.body)
-  const values = [...Object.values(req.body), id]
-  const permitedColumns = ["text", "date", "id"]
+  const values = Object.values(req.body)
+  const permitedColumns = ["text", "date"]
   const isValidOperation = keys.every(c => permitedColumns.includes(c))
-  if (!isValidOperation) {
-    return res.status(400).json({ error: "Invalid updates! Columns mismatch" })
-  }
+  if (!isValidOperation)
+    return res
+      .status(400)
+      .json({ error: `Invalid Column, permited '${permitedColumns.join(', ')}', received '${keys.join(', ')}'` })
   const sql = `UPDATE todo SET ${keys.map(c => `${c}=?`).join(", ")} WHERE id=?`
   const db = await getDatabaseConnection()
-  const resp = await db.run(sql, ...values)
+  const resp = await db.run(sql, ...values, id)
   res.json(resp)
 })
 
