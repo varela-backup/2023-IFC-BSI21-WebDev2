@@ -5,15 +5,17 @@ const PORT = process.env.PORT ?? 3000
 const app = express()
 app.use(express.json())
 
+// ROTA PRINCIPAL
 app.get("/", (req, res) => res.send("Hello World!"))
 
-// BUSCAR DADOS
+// BUSCAR TODAS OS DADOS
 app.get("/item", async (req, res) => {
   const db = await getDatabaseConnection()
   const resp = await db.all("SELECT * FROM todo")
   res.json(resp)
 })
 
+// BUSCAR DADOS POR ID
 app.get("/item/:id", async (req, res) => {
   const { id } = req.params
   const db = await getDatabaseConnection()
@@ -38,6 +40,7 @@ app.put("/item/:id", async (req, res) => {
   res.json(resp)
 })
 
+// ATUALIZAR DADOS (coluna)
 app.patch("/item/:id", async (req, res) => {
   const { id } = req.params
   const keys = Object.keys(req.body)
@@ -62,5 +65,5 @@ app.delete("/item/:id", async (req, res) => {
   res.json(resp)
 })
 
-
-app.listen(PORT, () => console.log(`⚡🔥 Server listening on port ${PORT}`))
+// ⚡🔥☄️🌑🌚🌞☀️⭐💧
+app.listen(PORT, () => console.log(`⚡ Server listening on port ${PORT}`))
