@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, RefObject } from "react"
 import Header from "./Header"
 import Input from "./Input"
 import List from "./List"
 import './App.css'
 
-export type TTodoRestItem = { id: number, text: string }
+export type TTodoRestItem = { id: number, text: string, ref: RefObject<HTMLLIElement> }
 
 export default function App() {
   const [todolist, setTodolist] = useState<TTodoRestItem[]>(
@@ -14,9 +14,7 @@ export default function App() {
   useEffect(() => {
     fetch("http://localhost:3000/item")
       .then(response => response.json())
-      .then(data => {
-        setTodolist(data)
-      })
+      .then(data => setTodolist(data))
   }, [])
 
   return <>

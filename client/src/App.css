@@ -37,7 +37,7 @@
 }
 
 .input-action {
-  width: 50rem;
+  width: 100%;
 }
 
 ul,
@@ -52,6 +52,10 @@ li {
   gap: .25rem;
   align-items: center;
   margin: 1rem;
+
+  & input {
+    flex-grow: 1;
+  }
 }
 
 .input-action,

@@ -1,25 +1,39 @@
-import { KeyboardEvent } from "react"
+import { KeyboardEvent, useRef } from "react"
 import { TTodoRestItem } from "./App"
 
-type TProps = { 
-  todolist: TTodoRestItem[], 
-  setTodolist: (todolist: TTodoRestItem[]) => void 
+type TProps = {
+  todolist: TTodoRestItem[],
+  setTodolist: (todolist: TTodoRestItem[]) => void
 }
 
 export default function (props: TProps) {
   const { todolist, setTodolist } = props
 
-  const onKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+  const ref = useRef<HTMLLIElement>(null)
+  const onKeyDown = async (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       const value = event.currentTarget.value
       event.currentTarget.value = ''
-      const newTodolist = [value, ...todolist]
+
+      const newTodolist = [{ id: -1, text: value, ref }, ...todolist]
       setTodolist(newTodolist)
-      localStorage.setItem('todolist', JSON.stringify(newTodolist))
+
+      const request = await fetch("http://localhost:3000/item", {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ todo: value })
+      })
+      const response = await request.json()
+
+      if (ref.current) {
+        ref.current.dataset.id = response.lastID
+        ref.current.className = 'synced'
+      }
+
     }
   }
 
   return <>
-    <input className="input-action" type="text" onKeyDown={onKeyDown} />
+    <input className="input-action" type="text" placeholder="o que você fará depois?" onKeyDown={onKeyDown} />
   </>
 }
