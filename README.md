@@ -7,7 +7,7 @@
 
 ```sh
 npm create vite@latest
-# React/Typescript + SWF
+# React/Typescript + swc
 cd <project-name>
 npm install
 ```
